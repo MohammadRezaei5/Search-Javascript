@@ -1,5 +1,4 @@
 let filterarray = [];
-
 let galleryarray = [
   {
     id: 1,
@@ -36,7 +35,7 @@ let galleryarray = [
 showgallery(galleryarray);
 
 function showgallery(currarray) {
-  document.getElementById("card").innerText = ""; // ino comment on/off kon chera gozashti? dalil bego
+  document.getElementById("card").innerText = "";
 
   for (let index = 0; index < currarray.length; index++) {
     document.getElementById("card").innerHTML += `
@@ -44,7 +43,6 @@ function showgallery(currarray) {
         <div class="card">
         <div class="img-wrapper">
         <img src="${currarray[index].src}" width="100%" height="320px"/></div>
-
         <span class="text-center p-2 d-flex justify-content-center align-items-center">${currarray[index].name}</span>
         </div>
         </div>
@@ -52,13 +50,9 @@ function showgallery(currarray) {
   }
 }
 
-
-// -------------------- in khobe bedone spinner
-
 document.getElementById("myinput").addEventListener("keyup", function () {
   let text = document.getElementById("myinput").value;
 
-  // Update filter array
   filterarray = galleryarray.filter(function (a) {
     return a.name.includes(text);
   });
@@ -74,29 +68,3 @@ document.getElementById("myinput").addEventListener("keyup", function () {
     document.getElementById("para").style.display = "none";
   }
 });
-
-// ---------------------------------------------
-
-// document.getElementById("myinput").addEventListener("keyup", function () {
-//   let text = document.getElementById("myinput").value;
-//   filterarray = galleryarray.filter(function (a) {
-//     if (a.name.includes(text)) {
-//       // a.name.toLowerCase().includes(text.toLowerCase())
-//       // a.name.includes(text)
-//       return a.name;
-//     }
-//   });
-//   if (this.value == "") {
-//     showgallery(galleryarray);
-//     document.getElementById("para").style.display = "none";
-//   } else {
-//     if (filterarray.length === 0) {
-//       document.getElementById("para").style.display = "block";
-//       document.getElementById("card").innerHTML = "";
-//     }
-//     //  else {
-//     //   showgallery(filterarray);
-//     //   document.getElementById("para").style.display = "none";
-//     // }
-//   }
-// });
