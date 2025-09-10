@@ -54,7 +54,7 @@ input {
 .wrapper {
   background-color: #f6f5f5;
   width: 600px;
-  height: 600px;
+  min-height: 600px;
 
   padding: 20px;
   border-radius: 8px;
@@ -89,4 +89,9 @@ img {
   width: 177px;
   height: 211px;
 }
-/* ---------------- */
+/* ------------------ Responsive  ------------------ */
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    width: 394px;
+  }
+}
