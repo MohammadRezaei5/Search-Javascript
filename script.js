@@ -1,4 +1,3 @@
-let filterarray = [];
 let galleryarray = [
   {
     id: 1,
@@ -31,40 +30,44 @@ let galleryarray = [
     src: "./images/Sweets.jpg",
   },
 ];
-
-showgallery(galleryarray);
+let filterarray = [];
 
 function showgallery(currarray) {
-  document.getElementById("card").innerText = "";
+  const cardElement = document.getElementById("card");
+  const paraElement = document.getElementById("para");
 
-  for (let index = 0; index < currarray.length; index++) {
-    document.getElementById("card").innerHTML += `
-        <div class="col-md-4 card-item">
-        <div class="card">
-        <div class="img-wrapper">
-        <img src="${currarray[index].src}" width="100%" height="320px"/></div>
-        <span class="text-center p-2 d-flex justify-content-center align-items-center">${currarray[index].name}</span>
-        </div>
-        </div>
-        `;
+  if (currarray.length === 0) {
+    cardElement.innerHTML = "";
+    paraElement.style.display = "block";
+    return;
   }
+
+  paraElement.style.display = "none";
+  let cardHTML = "";
+  currarray.forEach((item) => {
+    cardHTML += `
+      <div class="col-md-4 card-item">
+        <div class="card">
+          <div class="img-wrapper">
+            <img src="${item.src}" width="100%" height="320px"/>
+          </div>
+          <span class="text-center p-2 d-flex justify-content-center align-items-center">${item.name}</span>
+        </div>
+      </div>
+    `;
+  });
+  cardElement.innerHTML = cardHTML;
 }
 
-document.getElementById("myinput").addEventListener("keyup", function () {
-  let text = document.getElementById("myinput").value;
+document.getElementById("myinput").addEventListener("keyup", function (e) {
+  let text = e.target.value;
+  let filtered = galleryarray.filter((item) => item.name.includes(text));
 
-  filterarray = galleryarray.filter(function (a) {
-    return a.name.includes(text);
-  });
-
-  if (
-    filterarray.length === 0 &&
-    document.getElementById("myinput").value !== ""
-  ) {
-    document.getElementById("para").style.display = "block";
-    document.getElementById("card").innerHTML = "";
+  if (text === "") {
+    showgallery(galleryarray);
   } else {
-    showgallery(filterarray);
-    document.getElementById("para").style.display = "none";
+    showgallery(filtered);
   }
 });
+
+showgallery(galleryarray);
